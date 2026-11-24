@@ -1668,6 +1668,7 @@ GameObject:
   - component: {fileID: 1433354318}
   - component: {fileID: 1433354317}
   - component: {fileID: 1433354316}
+  - component: {fileID: 1433354319}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1712,14 +1713,7 @@ MonoBehaviour:
   speed: 5
   movement: {x: 0, y: 0}
   jumpHeight: 700
-  velocity: {x: 0, y: 0}
-  acceleration: 0
-  deceleration: 0
-  apexHeight: 3
-  apexTime: 0.5
-  gravity: 0
-  jumpVelocity: 0
-  isJumping: 0
+  justLeftGround: 0
 --- !u!4 &1433354315
 Transform:
   m_ObjectHideFlags: 0
@@ -1963,7 +1957,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 3
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -1975,6 +1969,29 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1433354319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433354312}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777e70fc4ffcd3a46a222b87e6766cd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewPlayerController
+  body2D: {fileID: 1433354318}
+  maxSpeed: 5
+  accelerationTime: 0.25
+  decelerationTime: 0.15
+  apexHeight: 3
+  apexTime: 0.5
+  groundCheckOffset: {x: 0, y: -0.65}
+  groundCheckSize: {x: 0.5, y: 0.1}
+  groundCheckMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1598075209
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     //public bool grounded;
     public float jumpHeight = 5;
 
+    public bool justLeftGround;
+
     public enum FacingDirection
     {
         left, right, idle
@@ -17,8 +19,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        gravity  = -2 * apexHeight / Mathf.Pow(apexHeight, 2);
-        jumpVelocity = 2 * apexHeight / apexTime;
+
     }
 
     void Update()
@@ -63,6 +64,12 @@ public class PlayerController : MonoBehaviour
         movement = context.ReadValue<Vector2>();
     }
 
+    IEnumerator coyoteTime()
+    {
+        Debug.Log("coyotetimestart");
+        yield return new WaitForSeconds(0.5f);
+        Debug.Log("coyotetimeend");
+    }
 
 
     public bool IsWalking()

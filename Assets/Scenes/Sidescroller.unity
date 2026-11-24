@@ -1711,7 +1711,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 5
   movement: {x: 0, y: 0}
-  jumpHeight: 400
+  jumpHeight: 700
+  velocity: {x: 0, y: 0}
+  acceleration: 0
+  deceleration: 0
+  apexHeight: 3
+  apexTime: 0.5
+  gravity: 0
+  jumpVelocity: 0
+  isJumping: 0
 --- !u!4 &1433354315
 Transform:
   m_ObjectHideFlags: 0

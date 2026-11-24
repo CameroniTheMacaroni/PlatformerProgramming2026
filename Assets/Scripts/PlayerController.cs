@@ -9,6 +9,17 @@ public class PlayerController : MonoBehaviour
     //public bool grounded;
     public float jumpHeight = 5;
 
+    public Vector2 velocity;
+    public float acceleration;
+    public float deceleration;
+
+    public float apexHeight = 3f;
+    public float apexTime = 0.5f;
+
+    public float gravity;
+    public float jumpVelocity;
+    public bool isJumping;
+
     public enum FacingDirection
     {
         left, right, idle
@@ -16,14 +27,12 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        
+        gravity  = -2 * apexHeight / Mathf.Pow(apexHeight, 2);
+        jumpVelocity = 2 * apexHeight / apexTime;
     }
 
     void Update()
     {
-        // The input from the player needs to be determined and
-        // then passed in the to the MovementUpdate which should
-        // manage the actual movement of the character.
         Vector2 playerInput = new Vector2();
         MovementUpdate(playerInput);
 
@@ -32,6 +41,7 @@ public class PlayerController : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame && IsGrounded())
         {
             this.GetComponent<Rigidbody2D>().AddForceY(jumpHeight);
+            //isJumping = true;
         }
     }
 
@@ -45,7 +55,23 @@ public class PlayerController : MonoBehaviour
         movement = context.ReadValue<Vector2>();
     }
 
+    private void FixedUpdate()
+    {
+        //if (!IsGrounded())
+        //{
+        //    movement.y += gravity * Time.deltaTime;
+        //}
+        //else
+        //{
+        //    movement.y = 0;
+        //}
 
+        if (isJumping)
+        {
+            isJumping = false;
+            movement.y = jumpVelocity;
+        }
+    }
 
     public bool IsWalking()
     {
@@ -61,9 +87,9 @@ public class PlayerController : MonoBehaviour
     public bool IsGrounded()
     {
         //bool hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f, LayerMask.GetMask("ground"));
-        Debug.DrawRay(transform.position, Vector2.down * 1.5f, Color.red);
+        Debug.DrawRay(transform.position, Vector2.down * 1, Color.red);
 
-        return Physics2D.Raycast(transform.position, Vector2.down, 1.5f, LayerMask.GetMask("Ground")); ;
+        return Physics2D.Raycast(transform.position, Vector2.down, 1, LayerMask.GetMask("Ground"));
     }
 
     public FacingDirection GetFacingDirection()
